@@ -19,15 +19,25 @@ class Team(models.Model):
     def __str__(self):
         return self.name
 
+    def save(self):
+        is_new = self.id is None
+        super(Team, self).save()
+        if is_new:
+            Score.objects.create(team=self)
+
+
+class ScoreLine(models.Model):
+    strokes = models.IntegerField(null=True)
+    points = models.IntegerField(null=True)
+
 
 class Score(models.Model):
     team = models.OneToOneField(
         Team,
         on_delete=models.CASCADE
     )
+    score_line = models.ForeignKey(
+        ScoreLine, on_delete=models.CASCADE, null=True)
 
-
-class ScoreLine(models.Model):
-    strokes = models.IntegerField(null=True)
-    points = models.IntegerField(null=True)
-    score = models.ForeignKey(Score, on_delete=models.CASCADE)
+    def __str__(self):
+        return '{} score'.format(self.team)
