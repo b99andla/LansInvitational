@@ -28,3 +28,5 @@ class ScoreAdmin(admin.ModelAdmin):
 admin.site.register(Round)
 admin.site.register(Team)
 admin.site.register(Score, ScoreAdmin)
+admin.site.site_header = 'Lans Invitational'
+admin.site.site_url = '/round'
