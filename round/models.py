@@ -19,16 +19,11 @@ class Team(models.Model):
     def __str__(self):
         return self.name
 
-    def save(self):
+    def save(self, **kwargs):
         is_new = self.id is None
         super(Team, self).save()
         if is_new:
             Score.objects.create(team=self)
-
-
-class ScoreLine(models.Model):
-    strokes = models.IntegerField(null=True)
-    points = models.IntegerField(null=True)
 
 
 class Score(models.Model):
@@ -36,8 +31,25 @@ class Score(models.Model):
         Team,
         on_delete=models.CASCADE
     )
-    score_line = models.ForeignKey(
-        ScoreLine, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return '{} score'.format(self.team)
+
+    def save(self, **kwargs):
+        is_new = self.id is None
+        super(Score, self).save()
+        if is_new:
+            for x in range(1, 19):
+                ScoreLine.objects.create(score=self, hole=x)
+
+
+class ScoreLine(models.Model):
+    hole = models.IntegerField(
+        "Hål",
+        null=False,
+    )
+    strokes = models.IntegerField(
+        "Antal slag",
+        null=True,
+        blank=True)
+    score = models.ForeignKey(Score)
