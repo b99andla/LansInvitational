@@ -10,6 +10,9 @@ class Round(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = "Runda"
+
 
 class Team(models.Model):
     name = models.CharField(max_length=30)
@@ -24,6 +27,9 @@ class Team(models.Model):
         super(Team, self).save()
         if is_new:
             Score.objects.create(team=self)
+
+    class Meta:
+        verbose_name = "Lag"
 
 
 class Score(models.Model):
