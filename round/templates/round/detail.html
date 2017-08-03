@@ -1,0 +1,18 @@
+{% if score_list %}
+<table>
+    <tr>
+        <th>Lagnamn</th>
+        <th>Befinner sig på hål</th>
+        <th>Antal slag</th>
+    </tr>
+    {% for score in score_list %}
+    <tr>
+        <td>{{ score.team.name }}</td>
+        <td>{{ score.on_hole }}</td>
+        <td>{{ score.total_strokes}}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No scores are available.</p>
+{% endif %}

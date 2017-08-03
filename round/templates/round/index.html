@@ -1,0 +1,9 @@
+{% if latest_round_list %}
+<ul>
+    {% for round in latest_round_list %}
+    <li><a href="/round/{{ round.id }}/">{{ round.name }}</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No rounds are available.</p>
+{% endif %}
