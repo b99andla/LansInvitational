@@ -1,18 +1,20 @@
-{% if score_list %}
-<table>
-    <tr>
-        <th>Lagnamn</th>
-        <th>Befinner sig på hål</th>
-        <th>Antal slag</th>
-    </tr>
-    {% for score in score_list %}
-    <tr>
-        <td>{{ score.team.name }}</td>
-        <td>{{ score.on_hole }}</td>
-        <td>{{ score.total_strokes}}</td>
-    </tr>
-    {% endfor %}
-</table>
+{% extends 'main/base.html' %}{% block content %}{% if score_list %}
+<div class="table-responsive">
+    <table class="table">
+        <tr>
+            <th>Lagnamn</th>
+            <th class="text-right">Befinner sig på hål</th>
+            <th class="text-right">Antal slag</th>
+        </tr>
+        {% for score in score_list %}
+        <tr>
+            <td>{{ score.team.name }}</td>
+            <td class="text-right">{{ score.on_hole }}</td>
+            <td class="text-right">{{ score.total_strokes}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
 {% else %}
 <p>No scores are available.</p>
-{% endif %}
+{% endif %}{%endblock%}

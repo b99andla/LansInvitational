@@ -1,9 +1,15 @@
-{% if latest_round_list %}
-<ul>
-    {% for round in latest_round_list %}
-    <li><a href="/round/{{ round.id }}/">{{ round.name }}</a></li>
-    {% endfor %}
-</ul>
+{% extends 'main/base.html' %}{% block content %} {% if latest_round_list %}
+
+<div class="container">
+    <div class="row">
+        <h2>Nuvarande runda</h2>
+        <ul>
+            {% for round in latest_round_list %}
+            <li><a href="/round/{{ round.id }}/">{{ round.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
 {% else %}
 <p>No rounds are available.</p>
-{% endif %}
+{% endif %} {% endblock %}

@@ -25,7 +25,7 @@ SECRET_KEY = '5s-9)8pk&u)r!f5mpr$!!jm3ctt0jj8ockfvsv1z!%*f*u$9z*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['35.197.203.85', 'localhost']
+ALLOWED_HOSTS = ['35.197.203.85', 'localhost', '35.189.106.234']
 
 
 # Application definition
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'main',
     'round'
 ]
 
@@ -121,3 +122,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')

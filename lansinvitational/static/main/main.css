@@ -1,0 +1,13 @@
+.jumbotron {
+    background-color: #417690;
+    /* Orange */
+    color: white;
+}
+
+ul {
+    list-style: none;
+}
+
+text-right {
+    text-align: right;
+}
