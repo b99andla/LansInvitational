@@ -5,12 +5,14 @@
             <th>Lagnamn</th>
             <th class="text-right">Befinner sig på hål</th>
             <th class="text-right">Antal slag</th>
+            <th class="text-right">Antal poäng</th>
         </tr>
         {% for score in score_list %}
         <tr>
             <td>{{ score.team.name }}</td>
             <td class="text-right">{{ score.on_hole }}</td>
             <td class="text-right">{{ score.total_strokes}}</td>
+            <td class="text-right">{{ score.total_points}}</td>
         </tr>
         {% endfor %}
     </table>

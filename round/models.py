@@ -1,8 +1,26 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.db.models import Sum
 
 # Create your models here.
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    handicap = models.FloatField(blank=True, null=True)
+
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
 
 
 class Round(models.Model):
@@ -19,6 +37,13 @@ class Team(models.Model):
     name = models.CharField(max_length=30)
     round = models.ForeignKey(Round, on_delete=models.CASCADE)
     user = models.ManyToManyField(User)
+
+    def hancicap(self):
+        players = User.objects.filter(team=self)
+        if(len(players) == 1):
+            return players[0].handicap
+        if(len(players) == 2):
+            return players
 
     def __str__(self):
         return self.name
@@ -42,9 +67,17 @@ class Score(models.Model):
     @property
     def total_strokes(self):
         strokes = self.scoreline_set.aggregate(Sum('strokes'))
-        print(strokes['strokes__sum'])
         if strokes['strokes__sum'] is not None:
             return strokes['strokes__sum']
+        else:
+            return '-'
+
+    @property
+    def total_points(self):
+        points = self.scoreline_set.aggregate(Sum('points'))
+        print(points)
+        if points['points__sum'] is not None:
+            return points['points__sum']
         else:
             return '-'
 
@@ -76,6 +109,10 @@ class ScoreLine(models.Model):
     )
     strokes = models.IntegerField(
         "Antal slag",
+        null=True,
+        blank=True)
+    points = models.IntegerField(
+        "Antal poäng",
         null=True,
         blank=True)
     score = models.ForeignKey(Score)
