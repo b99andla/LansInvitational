@@ -25,7 +25,8 @@ SECRET_KEY = '5s-9)8pk&u)r!f5mpr$!!jm3ctt0jj8ockfvsv1z!%*f*u$9z*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['35.197.203.85', 'localhost', '35.189.106.234']
+ALLOWED_HOSTS = ['35.197.203.85', 'localhost',
+                 '35.189.106.234', 'lansinvitational.ddns.net']
 
 
 # Application definition
