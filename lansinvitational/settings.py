@@ -119,9 +119,9 @@ USE_L10N = True
 
 USE_TZ = True
 
-# GRAPHENE = {
-#     'SCHEMA': 'lansinvitational.schema.schema'
-# }
+GRAPHENE = {
+    'SCHEMA': 'lansinvitational.schema.schema'
+}
 
 
 # Static files (CSS, JavaScript, Images)
